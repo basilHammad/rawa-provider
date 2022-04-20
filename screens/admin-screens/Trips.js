@@ -1,10 +1,10 @@
 import { Text, StyleSheet, FlatList } from "react-native";
 import React from "react";
 
-import Container from "../components/shared/Container";
-import Trip from "../components/shared/Trip";
+import Container from "../../components/shared/Container";
+import Trip from "../../components/shared/Trip";
 import { Ionicons } from "@expo/vector-icons";
-import { Btn } from "../components/shared/Buttons";
+import { Btn } from "../../components/shared/Buttons";
 
 const DUMMY_TRIP = [
   { id: 1, name: "Trip 1", orders_numbers: 5 },
@@ -16,7 +16,7 @@ const DUMMY_TRIP = [
 
 const Trips = ({ navigation }) => {
   return (
-    <Container style={stl.container}>
+    <Container>
       <Btn style={stl.btn} onPress={() => navigation.navigate("CreateTrip")}>
         <Text style={{ color: "#fff", marginRight: 5 }}>Create Trip</Text>
         <Ionicons name="add" size={24} color="white" />

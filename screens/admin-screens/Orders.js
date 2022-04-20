@@ -1,7 +1,7 @@
 import { Text, StyleSheet, FlatList } from "react-native";
 import { useState } from "react";
-import Container from "../components/shared/Container";
-import Order from "../components/shared/Order";
+import Container from "../../components/shared/Container";
+import Order from "../../components/shared/Order";
 
 const Dummy_order = [
   {

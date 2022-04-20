@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, SafeAreaView, Image } from "react-native";
-import { Btn } from "../components/shared/Buttons";
-import { COLORS, FONTS, SIZES } from "../constants";
-import { copyToClipboard } from "../utils";
+import { Btn } from "../../components/shared/Buttons";
+import { COLORS, FONTS, SIZES } from "../../constants";
+import { copyToClipboard } from "../../utils";
 
 const Invitation = () => {
   const link = "https://www.rawa.com";

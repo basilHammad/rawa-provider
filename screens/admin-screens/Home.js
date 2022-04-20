@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-import img from "../assets/favicon.png";
-import Container from "../components/shared/Container";
-import { BtnWithBackground } from "../components/shared/Buttons";
+import img from "../../assets/favicon.png";
+import Container from "../../components/shared/Container";
+import { BtnWithBackground } from "../../components/shared/Buttons";
 
 const Home = ({ navigation }) => {
   const gap = 5;

@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React, { useState } from "react";
 import { Link } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
+import { COLORS, SIZES } from "../../constants";
 
 const Trip = ({ isDriver, item, index, length }) => {
   const [selectedDriver, setSelectedDriver] = useState();
@@ -12,7 +13,7 @@ const Trip = ({ isDriver, item, index, length }) => {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: index !== length - 1 ? 15 : 0,
+        marginBottom: index !== length - 1 ? SIZES.large : 0,
       }}
     >
       <View
@@ -21,7 +22,8 @@ const Trip = ({ isDriver, item, index, length }) => {
           justifyContent: "space-between",
           alignItems: "center",
           flexGrow: 1,
-          marginRight: 20,
+          marginRight: SIZES.extraLarge,
+          paddingRight: SIZES.medium,
         }}
       >
         <Text>{item.name}</Text>
@@ -39,23 +41,23 @@ const Trip = ({ isDriver, item, index, length }) => {
           <>
             <Link
               style={{
-                backgroundColor: "#50bafe",
-                paddingHorizontal: 15,
-                paddingVertical: 10,
-                marginRight: 20,
-                color: "#fff",
+                backgroundColor: COLORS.blue,
+                paddingHorizontal: SIZES.medium,
+                paddingVertical: SIZES.small,
+                marginRight: SIZES.extraLarge,
+                color: COLORS.white,
                 borderRadius: 5,
               }}
-              to={{ screen: "TripView" }}
+              to={{ screen: "Map", params: { coordinates: item.orders } }}
             >
               View
             </Link>
             <Link
               style={{
-                backgroundColor: "#7acd3b",
-                paddingHorizontal: 15,
-                paddingVertical: 10,
-                color: "#fff",
+                backgroundColor: COLORS.green,
+                paddingHorizontal: SIZES.medium,
+                paddingVertical: SIZES.small,
+                color: COLORS.white,
                 borderRadius: 5,
               }}
               to={{ screen: "TripMap" }}

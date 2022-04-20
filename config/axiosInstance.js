@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getData } from "../utils";
 
 const fetcher = axios.create({
   baseURL: `https://api.publicapis.org/entries`,
@@ -10,5 +11,17 @@ const fetcher = axios.create({
     Accept: "application/json",
   },
 });
+
+fetcher.interceptors.request.use(
+  async (config) => {
+    // config.headers.token = CLIENT_SECRET;
+    if (typeof window !== "undefined") {
+      const token = getData("token");
+      config.headers.Authorization = `Bearer ${token} `;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 export default fetcher;

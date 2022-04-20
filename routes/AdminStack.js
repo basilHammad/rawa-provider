@@ -1,19 +1,17 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-import backIcon from "../../assets/icon.png";
-
-import Home from "../../screens/Home";
-import Orders from "../../screens/Orders";
-import Invitation from "../../screens/Invitation";
-import Header from "../../components/shared/Header";
-import Trips from "../../screens/Trips";
-import Map from "../../screens/Map";
-import CreateTrip from "../../screens/CreateTrip";
+import Home from "../screens/admin-screens/Home";
+import Orders from "../screens/admin-screens/Orders";
+import Invitation from "../screens/admin-screens/Invitation";
+import Header from "../components/shared/Header";
+import Trips from "../screens/admin-screens/Trips";
+import Map from "../screens/admin-screens/Map";
+import CreateTrip from "../screens/admin-screens/CreateTrip";
 
 const Stack = createNativeStackNavigator();
 
-const MainStack = () => {
+const AdminStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -42,4 +40,4 @@ const MainStack = () => {
   );
 };
 
-export default MainStack;
+export default AdminStack;

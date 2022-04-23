@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, SafeAreaView, Image } from "react-native";
-import { Btn } from "../../components/shared/Buttons";
+import { Btn } from "../../components/Buttons";
 import { COLORS, FONTS, SIZES } from "../../constants";
 import { copyToClipboard } from "../../utils";
 

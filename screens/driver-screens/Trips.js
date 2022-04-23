@@ -1,8 +1,8 @@
 import { FlatList, Text } from "react-native";
 import React from "react";
 
-import Container from "../../components/shared/Container";
-import Trip from "../../components/shared/Trip";
+import Container from "../../components/Container";
+import Trip from "../../components/Trip";
 import { FONTS, SIZES } from "../../constants";
 
 const DUMMY_TRIP = [
@@ -106,23 +106,7 @@ const DUMMY_TRIP = [
 const Trips = () => {
   return (
     <Container>
-      <Text
-        style={{
-          fontFamily: FONTS.bold,
-          fontSize: SIZES.extraLarge,
-          marginTop: SIZES.extraLarge * 2,
-          marginBottom: SIZES.extraLarge,
-        }}
-      >
-        Trips
-      </Text>
-      <FlatList
-        data={DUMMY_TRIP}
-        renderItem={({ item, index }) => (
-          <Trip isDriver item={item} index={index} length={DUMMY_TRIP.length} />
-        )}
-        keyExtractor={(item) => item.id}
-      />
+      <Text>Driver</Text>
     </Container>
   );
 };

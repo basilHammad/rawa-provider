@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React, { useState } from "react";
 import { Link } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
-import { COLORS, SIZES } from "../../constants";
+import { COLORS, SIZES } from "../constants";
 
 const Trip = ({ isDriver, item, index, length }) => {
   const [selectedDriver, setSelectedDriver] = useState();

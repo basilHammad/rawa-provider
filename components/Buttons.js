@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, Pressable, ImageBackground } from "react-native";
-import { COLORS, SIZES } from "../../constants";
+import { COLORS, SIZES } from "../constants";
 
 export const BtnWithBackground = ({
   backgroundColor,
@@ -13,7 +13,7 @@ export const BtnWithBackground = ({
     <Pressable
       onPress={onPress}
       style={{
-        backgroundColor: COLORS.blue,
+        backgroundColor: backgroundColor,
         flex: 1,
         padding: SIZES.small,
         borderRadius: SIZES.medium,

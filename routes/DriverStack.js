@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import Trips from "../screens/driver-screens/Trips";
 import Map from "../screens/driver-screens/Map";
-import Header from "../components/shared/Header";
+import Header from "../components/Header";
 
 const Stack = createNativeStackNavigator();
 

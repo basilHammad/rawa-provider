@@ -1,65 +1,84 @@
-import React, { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { View, TouchableWithoutFeedback, Text } from "react-native";
 
-import Container from "../components/shared/Container";
-import Input from "../components/shared/Input";
-import { Btn } from "../components/shared/Buttons";
+import Container from "../components/Container";
+import Input from "../components/Input";
+import { Btn } from "../components/Buttons";
 import { COLORS, FONTS, SIZES } from "../constants";
-import { storeData, closeKeyboard } from "../utils";
+import { closeKeyboard, validateLoginForm } from "../utils";
+import userContext from "../context/user/userContext";
+import Spinner from "react-native-loading-spinner-overlay";
 
-const Login = ({ setIsLoggedin }) => {
-  const [userName, setUserName] = useState("");
+const Login = () => {
+  const [username, setusername] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({ userName: "", password: "" });
+  const [errors, setErrors] = useState({});
 
-  const handelSubmit = async () => {
-    // validate
-    // post the form
-    // save the access Token
-    // save userData
-    // redirect to home based on user role
-    await storeData("token", "value");
-    await storeData("userData", { username: "admin", role: "admin" });
-    setIsLoggedin(true);
+  const { isLoading, login } = useContext(userContext);
+
+  const handelSubmit = () => {
+    const validationErrors = validateLoginForm(username, password);
+    // if (Object.keys(validationErrors).length) {
+    //   setErrors(validationErrors);
+    //   return;
+    // }
+
+    login("api_provider", "123456", setErrors);
   };
 
   return (
     <Container>
-      <TouchableWithoutFeedback onPress={closeKeyboard}>
-        <View
-          style={{
-            flex: 1,
-            paddingTop: 200,
-            alignItems: "center",
-          }}
-        >
-          <Input
-            value={userName}
-            onChange={setUserName}
-            placeholder="Username or mobile number"
-            error={errors.userName}
-          />
-          <Input
-            value={password}
-            onChange={setPassword}
-            placeholder="Password"
-            error={errors.password}
-          />
-          <Btn
+      {isLoading ? (
+        <Spinner visible={isLoading} />
+      ) : (
+        <TouchableWithoutFeedback onPress={closeKeyboard}>
+          <View
             style={{
-              backgroundColor: COLORS.yellow,
-              width: "100%",
-              justifyContet: "center",
+              flex: 1,
+              paddingTop: 200,
               alignItems: "center",
-              padding: SIZES.small,
-              borderRadius: SIZES.medium,
             }}
-            onPress={handelSubmit}
           >
-            <Text style={{ fontFamily: FONTS.bold }}>Login</Text>
-          </Btn>
-        </View>
-      </TouchableWithoutFeedback>
+            {errors?.generalError && (
+              <Text
+                style={{
+                  color: COLORS.red,
+                  fontFamily: FONTS.semiBold,
+                  marginBottom: SIZES.medium,
+                }}
+              >
+                {errors?.generalError}
+              </Text>
+            )}
+            <Input
+              value={username}
+              onChange={setusername}
+              placeholder="username or mobile number"
+              error={errors.username}
+            />
+            <Input
+              value={password}
+              onChange={setPassword}
+              placeholder="Password"
+              error={errors.password}
+              isPassword
+            />
+            <Btn
+              style={{
+                backgroundColor: COLORS.yellow,
+                width: "100%",
+                justifyContet: "center",
+                alignItems: "center",
+                padding: SIZES.small,
+                borderRadius: SIZES.medium,
+              }}
+              onPress={handelSubmit}
+            >
+              <Text style={{ fontFamily: FONTS.bold }}>Login</Text>
+            </Btn>
+          </View>
+        </TouchableWithoutFeedback>
+      )}
     </Container>
   );
 };

@@ -1,61 +1,19 @@
 import { Text, StyleSheet, FlatList } from "react-native";
-import { useState } from "react";
-import Container from "../../components/shared/Container";
-import Order from "../../components/shared/Order";
-
-const Dummy_order = [
-  {
-    id: 1,
-    customer_name: "customer 1",
-    orders: [
-      { item: "bottel", quantity: "5" },
-      { item: "cobon", quantity: "2" },
-    ],
-    coordinate: {
-      latitude: 32.02200775669563,
-      longitude: 35.843985201561225,
-    },
-  },
-  {
-    id: 2,
-    customer_name: "customer 2",
-    orders: [
-      { item: "bottel", quantity: "5" },
-      { item: "cobon", quantity: "2" },
-    ],
-    coordinate: {
-      latitude: 32.02200775669563,
-      longitude: 35.843985201561225,
-    },
-  },
-  {
-    id: 3,
-    customer_name: "customer 3",
-    orders: [
-      { item: "bottel", quantity: "5" },
-      { item: "cobon", quantity: "2" },
-    ],
-    coordinate: {
-      latitude: 32.02200775669563,
-      longitude: 35.843985201561225,
-    },
-  },
-  {
-    id: 4,
-    customer_name: "customer 4",
-    orders: [
-      { item: "bottel", quantity: "5" },
-      { item: "cobon", quantity: "2" },
-    ],
-    coordinate: {
-      latitude: 32.02200775669563,
-      longitude: 35.843985201561225,
-    },
-  },
-];
+import { useState, useEffect, useContext } from "react";
+import Container from "../../components/Container";
+import Order from "../../components/Order";
+import orderContext from "../../context/order/orderContext";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const Orders = () => {
   const [selectedOrdersIds, setSelectedOrdersIds] = useState([]);
+  const { orders, isLoading, getOrders } = useContext(orderContext);
+
+  useEffect(() => {
+    if (orders.length) return;
+
+    getOrders();
+  }, []);
 
   const handleCheckboxChange = (id) => {
     if (selectedOrdersIds.includes(id)) {
@@ -67,29 +25,24 @@ const Orders = () => {
 
   return (
     <Container style={stl.container}>
-      <Text
-        style={{
-          marginTop: 50,
-          marginBottom: 30,
-          fontSize: 24,
-          color: "gray",
-        }}
-      >
-        Today
-      </Text>
-      <FlatList
-        data={Dummy_order}
-        renderItem={({ item, index }) => (
-          <Order
-            item={item}
-            index={index}
-            length={Dummy_order.length}
-            handleCheckboxChange={handleCheckboxChange}
-            selectedOrdersIds={selectedOrdersIds}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-      />
+      {isLoading ? (
+        <Spinner visible={isLoading} />
+      ) : (
+        <FlatList
+          data={orders}
+          renderItem={({ item, index }) => (
+            <Order
+              item={item}
+              index={index}
+              length={orders.length}
+              handleCheckboxChange={handleCheckboxChange}
+              selectedOrdersIds={selectedOrdersIds}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+          style={{ marginTop: 50 }}
+        />
+      )}
     </Container>
   );
 };

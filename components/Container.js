@@ -1,6 +1,6 @@
-import React from "react";
-
 import { StyleSheet, SafeAreaView } from "react-native";
+
+import { COLORS, SIZES } from "../constants";
 
 const Container = ({ children, style }) => {
   return (
@@ -13,8 +13,8 @@ const Container = ({ children, style }) => {
 const stl = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
-    backgroundColor: "#fff",
+    paddingHorizontal: SIZES.large,
+    backgroundColor: COLORS.white,
   },
 });
 

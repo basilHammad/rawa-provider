@@ -1,18 +1,22 @@
-import React from "react";
+import { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 
 import img from "../../assets/favicon.png";
-import Container from "../../components/shared/Container";
-import { BtnWithBackground } from "../../components/shared/Buttons";
+import Container from "../../components/Container";
+import { BtnWithBackground } from "../../components/Buttons";
+import userContext from "../../context/user/userContext";
+import Login from "../Login";
+import { COLORS, SIZES } from "../../constants";
 
 const Home = ({ navigation }) => {
-  const gap = 5;
+  const { isLoggedin } = useContext(userContext);
+  if (!isLoggedin) return <Login />;
   return (
     <Container style={stl.container}>
-      <View style={{ flexDirection: "row", marginBottom: gap }}>
-        <View style={{ flexGrow: 1, marginRight: gap, minHeight: 130 }}>
+      <View style={{ flexDirection: "row", marginBottom: SIZES.base }}>
+        <View style={{ flexGrow: 1, marginRight: SIZES.base, minHeight: 130 }}>
           <BtnWithBackground
-            backgroundColor={"#44368d"}
+            backgroundColor={COLORS.darkBlue}
             img={img}
             text="My Orders"
             onPress={() => navigation.navigate("Orders")}
@@ -21,7 +25,7 @@ const Home = ({ navigation }) => {
         </View>
         <View style={{ flexGrow: 1, minHeight: 130 }}>
           <BtnWithBackground
-            backgroundColor={"#44368d"}
+            backgroundColor={COLORS.darkBlue}
             img={img}
             text="Invitation"
             onPress={() => navigation.navigate("Invitation")}
@@ -30,7 +34,7 @@ const Home = ({ navigation }) => {
       </View>
       <View style={{ width: "100%", minHeight: 80 }}>
         <BtnWithBackground
-          backgroundColor={"#44368d"}
+          backgroundColor={COLORS.darkBlue}
           img={img}
           text="Trips"
           onPress={() => navigation.navigate("Trips")}
@@ -44,7 +48,7 @@ const stl = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.white,
   },
 });
 

@@ -1,62 +1,20 @@
 import { StyleSheet, Text, FlatList } from "react-native";
-import React, { useState } from "react";
-import Container from "../../components/shared/Container";
-import Order from "../../components/shared/Order";
-import { Btn } from "../../components/shared/Buttons";
-
-const Dummy_order = [
-  {
-    id: 1,
-    customer_name: "customer 1",
-    orders: [
-      { item: "bottel", quantity: "5" },
-      { item: "cobon", quantity: "2" },
-    ],
-    coordinate: {
-      latitude: 32.02200775669563,
-      longitude: 35.843985201561225,
-    },
-  },
-  {
-    id: 2,
-    customer_name: "customer 2",
-    orders: [
-      { item: "bottel", quantity: "5" },
-      { item: "cobon", quantity: "2" },
-    ],
-    coordinate: {
-      latitude: 32.02200775669563,
-      longitude: 35.843985201561225,
-    },
-  },
-  {
-    id: 3,
-    customer_name: "customer 3",
-    orders: [
-      { item: "bottel", quantity: "5" },
-      { item: "cobon", quantity: "2" },
-    ],
-    coordinate: {
-      latitude: 32.02200775669563,
-      longitude: 35.843985201561225,
-    },
-  },
-  {
-    id: 4,
-    customer_name: "customer 4",
-    orders: [
-      { item: "bottel", quantity: "5" },
-      { item: "cobon", quantity: "2" },
-    ],
-    coordinate: {
-      latitude: 32.02200775669563,
-      longitude: 35.843985201561225,
-    },
-  },
-];
+import { useState, useContext, useEffect } from "react";
+import Container from "../../components/Container";
+import Order from "../../components/Order";
+import { Btn } from "../../components/Buttons";
+import orderContext from "../../context/order/orderContext";
+import Spinner from "react-native-loading-spinner-overlay";
+import { COLORS, SIZES } from "../../constants";
 
 const CreateTrip = ({ navigation }) => {
   const [selectedOrdersIds, setSelectedOrdersIds] = useState([]);
+  const { orders, isLoading, getOrders } = useContext(orderContext);
+
+  useEffect(() => {
+    if (orders.length) return;
+    getOrders();
+  }, []);
 
   const handleCheckboxChange = (id) => {
     if (selectedOrdersIds.includes(id)) {
@@ -68,25 +26,30 @@ const CreateTrip = ({ navigation }) => {
 
   return (
     <Container>
-      <FlatList
-        data={Dummy_order}
-        renderItem={({ item, index }) => (
-          <Order
-            item={item}
-            index={index}
-            length={Dummy_order.length}
-            handleCheckboxChange={handleCheckboxChange}
-            selectedOrdersIds={selectedOrdersIds}
-            withCheckBox
+      {isLoading ? (
+        <Spinner visible={isLoading} />
+      ) : (
+        <>
+          <FlatList
+            data={orders}
+            renderItem={({ item, index }) => (
+              <Order
+                item={item}
+                index={index}
+                length={orders.length}
+                handleCheckboxChange={handleCheckboxChange}
+                selectedOrdersIds={selectedOrdersIds}
+                withCheckBox
+              />
+            )}
+            keyExtractor={(item) => item.id}
+            style={{ marginTop: 50 }}
           />
-        )}
-        keyExtractor={(item) => item.id}
-        style={{ marginTop: 50 }}
-      />
-
-      <Btn style={stl.btn} onPress={() => navigation.navigate("Trips")}>
-        <Text style={{ color: "#fff", marginRight: 5 }}>Create</Text>
-      </Btn>
+          <Btn style={stl.btn} onPress={() => navigation.navigate("Trips")}>
+            <Text style={{ color: COLORS.white, marginRight: 5 }}>Create</Text>
+          </Btn>
+        </>
+      )}
     </Container>
   );
 };
@@ -94,15 +57,15 @@ const CreateTrip = ({ navigation }) => {
 const stl = StyleSheet.create({
   btn: {
     flexDirection: "row",
-    backgroundColor: "#44368d",
+    backgroundColor: COLORS.darkBlue,
     justifyContent: "center",
     alignItems: "center",
-    padding: 15,
-    marginTop: 20,
-    borderRadius: 15,
+    padding: SIZES.medium,
+    marginTop: SIZES.large,
+    borderRadius: SIZES.medium,
     position: "absolute",
-    left: 20,
-    right: 20,
+    left: SIZES.large,
+    right: SIZES.large,
     bottom: 50,
   },
 });

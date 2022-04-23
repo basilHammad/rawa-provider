@@ -2,7 +2,7 @@ import { View, StyleSheet, Dimensions, SafeAreaView } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 const Map = ({ route }) => {
-  const { latitude, longitude, name } = route.params;
+  const { latitude, longitude, name, title } = route.params;
   return (
     <SafeAreaView style={styles.container}>
       <MapView

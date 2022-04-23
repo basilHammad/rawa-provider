@@ -1,10 +1,10 @@
 import { Text, StyleSheet, FlatList } from "react-native";
-import React from "react";
-
-import Container from "../../components/shared/Container";
-import Trip from "../../components/shared/Trip";
 import { Ionicons } from "@expo/vector-icons";
-import { Btn } from "../../components/shared/Buttons";
+
+import Container from "../../components/Container";
+import Trip from "../../components/Trip";
+import { Btn } from "../../components/Buttons";
+import { COLORS, SIZES } from "../../constants";
 
 const DUMMY_TRIP = [
   { id: 1, name: "Trip 1", orders_numbers: 5 },
@@ -18,8 +18,8 @@ const Trips = ({ navigation }) => {
   return (
     <Container>
       <Btn style={stl.btn} onPress={() => navigation.navigate("CreateTrip")}>
-        <Text style={{ color: "#fff", marginRight: 5 }}>Create Trip</Text>
-        <Ionicons name="add" size={24} color="white" />
+        <Text style={{ color: COLORS.white, marginRight: 5 }}>Create Trip</Text>
+        <Ionicons name="add" size={SIZES.extraLarge} color="white" />
       </Btn>
       <FlatList
         data={DUMMY_TRIP}
@@ -35,12 +35,12 @@ const Trips = ({ navigation }) => {
 const stl = StyleSheet.create({
   btn: {
     flexDirection: "row",
-    backgroundColor: "#44368d",
+    backgroundColor: COLORS.darkBlue,
     justifyContent: "center",
     alignItems: "center",
-    padding: 15,
-    marginVertical: 20,
-    borderRadius: 15,
+    padding: SIZES.medium,
+    marginVertical: SIZES.large,
+    borderRadius: SIZES.medium,
   },
 });
 

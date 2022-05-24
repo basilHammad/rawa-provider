@@ -19,12 +19,13 @@ const Map = ({ route }) => {
   const { isTrip, orders, cords } = route.params;
   const [selectedOrder, setSelectedOrder] = useState(isTrip ? orders[0] : null);
 
-  const firstOrderCords = isTrip
-    ? {
-        lat: orders[0].customer_address_id.location_lat,
-        lng: orders[0].customer_address_id.location_lng,
-      }
-    : null;
+  const firstOrderCords =
+    isTrip && orders[0]
+      ? {
+          lat: orders[0].customer_address_id.location_lat,
+          lng: orders[0].customer_address_id.location_lng,
+        }
+      : null;
 
   const slideAnim = useRef(
     new Animated.Value(OVERLAY_HEIGHT - OVERLAY_GRAP_HEIGHT)
@@ -56,14 +57,14 @@ const Map = ({ route }) => {
     <SafeAreaView style={styles.container}>
       <MapView
         initialRegion={{
-          latitude: isTrip ? firstOrderCords.lat : cords.lat,
-          longitude: isTrip ? firstOrderCords.lng : cords.lng,
+          latitude: firstOrderCords ? firstOrderCords.lat : cords.lat,
+          longitude: firstOrderCords ? firstOrderCords.lng : cords.lng,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
         style={styles.map}
       >
-        {isTrip ? (
+        {isTrip && firstOrderCords ? (
           orders.map((order, i) => (
             <Marker
               key={i}
@@ -84,7 +85,7 @@ const Map = ({ route }) => {
           />
         )}
       </MapView>
-      {isTrip && (
+      {isTrip && firstOrderCords && (
         <MapOverlay
           slideAnim={slideAnim}
           slideUp={slideUp}

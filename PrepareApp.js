@@ -55,5 +55,3 @@ export default function PrepareApp() {
     <Login setIsLoggedin={setIsLoggedin} />
   );
 }
-
-// Todo redirect from home to login if no token

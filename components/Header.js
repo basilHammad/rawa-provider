@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
 
-import Logo from "../assets/rawa.png";
+import Logo from "../assets/logo.svg";
 import { SIZES } from "../constants";
 
 const LogoTitle = () => {
@@ -12,10 +12,9 @@ const LogoTitle = () => {
         alignItems: "center",
       }}
     >
-      <Image
-        style={{ width: 50, height: 50, marginRight: SIZES.small }}
-        source={Logo}
-      />
+      <View style={{ marginRight: SIZES.small }}>
+        <Logo width={50} height={50} />
+      </View>
       <Text style={{ fontFamily: "robotoBold", fontSize: SIZES.large }}>
         Rawa
       </Text>

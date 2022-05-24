@@ -1,4 +1,4 @@
-import { Keyboard } from "react-native";
+import { Keyboard, Linking, Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Clipboard from "expo-clipboard";
 import CryptoJS from "crypto-js";
@@ -48,4 +48,12 @@ export const validateLoginForm = (username, password) => {
   if (!password.trim().length) errors.password = "password cant be empty";
 
   return errors;
+};
+
+export const makeCall = (phoneNumber) => {
+  if (Platform.OS === "android") {
+    Linking.openURL(`tel:${phoneNumber}`);
+  } else {
+    Linking.openURL(`telprompt:${phoneNumber}`);
+  }
 };

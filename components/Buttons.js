@@ -57,8 +57,8 @@ export const BtnWithBackground = ({
   );
 };
 
-export const Btn = ({ style, children, onPress }) => (
-  <Pressable onPress={onPress} style={style}>
+export const Btn = ({ style, children, onPress, disabled }) => (
+  <Pressable disabled={disabled} onPress={onPress} style={style}>
     {children}
   </Pressable>
 );

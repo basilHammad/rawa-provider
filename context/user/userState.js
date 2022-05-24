@@ -29,6 +29,7 @@ const UserState = (props) => {
       payload: val,
     });
   };
+
   const setIsloading = (val) => {
     dispatch({
       type: types.SET_IS_LOADING,
@@ -66,6 +67,8 @@ const UserState = (props) => {
             generalError: error.response.data.message,
           }));
         }
+
+        console.log({ ...error });
       }
     }
   };

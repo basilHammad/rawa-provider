@@ -4,7 +4,7 @@ import { COLORS, SIZES } from "../constants";
 
 const Container = ({ children, style }) => {
   return (
-    <SafeAreaView style={{ ...style, ...stl.container }}>
+    <SafeAreaView style={{ ...stl.container, ...style }}>
       {children}
     </SafeAreaView>
   );
@@ -13,7 +13,7 @@ const Container = ({ children, style }) => {
 const stl = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: SIZES.large,
+    paddingHorizontal: SIZES.extraLarge,
     backgroundColor: COLORS.white,
   },
 });

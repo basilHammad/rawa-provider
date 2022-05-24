@@ -14,6 +14,7 @@ const Order = ({
   selectedOrdersIds,
 }) => {
   const navigation = useNavigation();
+  console.log(item);
   return withCheckBox ? (
     <TouchableOpacity onPress={() => handleCheckboxChange(item.id)}>
       <View
@@ -53,6 +54,7 @@ const Order = ({
       style={{
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
         borderBottomWidth: index !== length - 1 ? 1 : 0,
         paddingBottom: 2,
         borderColor: "#eee",
@@ -65,7 +67,8 @@ const Order = ({
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            flexWrap: "wrap",
+            paddingVertical: SIZES.base,
           }}
         >
           {item.order_products.map((order, i) => (
@@ -81,8 +84,12 @@ const Order = ({
         color="blue"
         onPress={() =>
           navigation.navigate("Map", {
-            latitude: item.customer_address.location_lat,
-            longitude: item.customer_address.location_lng,
+            // latitude: item.customer_address.location_lat,
+            // longitude: item.customer_address.location_lng,
+            cords: {
+              lat: item.customer_address.location_lat,
+              lng: item.customer_address.location_lng,
+            },
             name: item.customer.name,
             title: item.customer.name,
           })

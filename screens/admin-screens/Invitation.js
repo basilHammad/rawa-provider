@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, SafeAreaView, Image } from "react-native";
+
 import { Btn } from "../../components/Buttons";
 import { COLORS, FONTS, SIZES } from "../../constants";
 import { copyToClipboard } from "../../utils";
+import InvitationSvg from "../../assets/Invitation.svg";
 
 const Invitation = () => {
   const link = "https://www.rawa.com";
@@ -10,6 +12,10 @@ const Invitation = () => {
   const handleInvite = () => {};
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{ marginTop: "auto" }}>
+        <InvitationSvg width={100} height={100} />
+      </View>
+
       <View
         style={{
           backgroundColor: COLORS.gray,
@@ -63,7 +69,7 @@ const Invitation = () => {
       >
         <Text
           style={{
-            fontFamily: FONTS.regular,
+            fontFamily: FONTS.semiBold,
             width: "100%",
             textAlign: "center",
           }}

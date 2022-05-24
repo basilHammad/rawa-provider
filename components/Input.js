@@ -3,26 +3,34 @@ import React from "react";
 
 import { COLORS, SIZES } from "../constants";
 
-const Input = ({ value, onChange, placeholder, style, error, isPassword }) => {
+const Input = ({
+  value,
+  onChange,
+  placeholder,
+  style,
+  pareintStyle,
+  error,
+  isPassword,
+  multiline,
+}) => {
   return (
     <View
       style={{
-        width: "90%",
         marginBottom: SIZES.large,
+        ...pareintStyle,
       }}
     >
       <TextInput
         style={{
-          height: 40,
           borderColor: error ? COLORS.red : COLORS.gray,
-          borderBottomWidth: 3,
-          paddingVertical: SIZES.small,
+          padding: SIZES.small,
           ...style,
         }}
         value={value}
         onChangeText={(val) => onChange(val)}
         placeholder={placeholder}
         secureTextEntry={isPassword}
+        multiline={multiline}
       />
 
       <Text

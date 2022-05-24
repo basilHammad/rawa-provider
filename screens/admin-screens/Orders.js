@@ -37,6 +37,7 @@ const Orders = () => {
               length={orders.length}
               handleCheckboxChange={handleCheckboxChange}
               selectedOrdersIds={selectedOrdersIds}
+              showsVerticalScrollIndicator={false}
             />
           )}
           keyExtractor={(item) => item.id}

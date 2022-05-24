@@ -1,15 +1,20 @@
-import { StyleSheet, Text, FlatList } from "react-native";
+import { StyleSheet, Text, FlatList, ActivityIndicator } from "react-native";
 import { useState, useContext, useEffect } from "react";
 import Container from "../../components/Container";
 import Order from "../../components/Order";
 import { Btn } from "../../components/Buttons";
 import orderContext from "../../context/order/orderContext";
 import Spinner from "react-native-loading-spinner-overlay";
-import { COLORS, SIZES } from "../../constants";
+import { COLORS, FONTS, SIZES } from "../../constants";
+import Input from "../../components/Input";
 
 const CreateTrip = ({ navigation }) => {
   const [selectedOrdersIds, setSelectedOrdersIds] = useState([]);
-  const { orders, isLoading, getOrders } = useContext(orderContext);
+  const [error, setError] = useState("");
+  const [name, setName] = useState("");
+
+  const { orders, isLoading, internalLoading, getOrders, createTrip } =
+    useContext(orderContext);
 
   useEffect(() => {
     if (orders.length) return;
@@ -24,12 +29,42 @@ const CreateTrip = ({ navigation }) => {
     }
   };
 
+  const handleSubmit = () => {
+    if (!selectedOrdersIds.length) {
+      setError("please select an order");
+      return;
+    }
+    if (!name) {
+      setError("Please add a trip name");
+      return;
+    }
+
+    createTrip(
+      selectedOrdersIds,
+      name,
+      () => navigation.navigate("Trips", { isTripsUpdated: true }),
+      setError
+    );
+  };
+
   return (
     <Container>
       {isLoading ? (
         <Spinner visible={isLoading} />
       ) : (
         <>
+          <Input
+            value={name}
+            onChange={setName}
+            placeholder="Trip Name"
+            allowFontScaling={false}
+            multiline={false}
+            style={{
+              height: "auto",
+              borderWidth: 1,
+              marginTop: SIZES.large,
+            }}
+          />
           <FlatList
             data={orders}
             renderItem={({ item, index }) => (
@@ -43,10 +78,17 @@ const CreateTrip = ({ navigation }) => {
               />
             )}
             keyExtractor={(item) => item.id}
-            style={{ marginTop: 50 }}
+            showsVerticalScrollIndicator={false}
           />
-          <Btn style={stl.btn} onPress={() => navigation.navigate("Trips")}>
-            <Text style={{ color: COLORS.white, marginRight: 5 }}>Create</Text>
+          {error ? <Text style={stl.error}>{error}</Text> : null}
+          <Btn style={stl.btn} onPress={handleSubmit}>
+            {internalLoading ? (
+              <ActivityIndicator color={COLORS.white} />
+            ) : (
+              <Text style={{ color: COLORS.white, marginRight: 5 }}>
+                Create
+              </Text>
+            )}
           </Btn>
         </>
       )}
@@ -67,6 +109,16 @@ const stl = StyleSheet.create({
     left: SIZES.large,
     right: SIZES.large,
     bottom: 50,
+  },
+  error: {
+    position: "absolute",
+    left: SIZES.large,
+    right: SIZES.large,
+    bottom: 120,
+    textAlign: "center",
+    color: COLORS.red,
+    fontFamily: FONTS.bold,
+    paddingHorizontal: SIZES.medium,
   },
 });
 

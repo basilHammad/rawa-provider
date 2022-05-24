@@ -13,14 +13,13 @@ const Home = ({ navigation }) => {
   if (!isLoggedin) return <Login />;
   return (
     <Container style={stl.container}>
-      <View style={{ flexDirection: "row", marginBottom: SIZES.base }}>
-        <View style={{ flexGrow: 1, marginRight: SIZES.base, minHeight: 130 }}>
+      <View style={{ flexDirection: "row", marginBottom: SIZES.medium }}>
+        <View style={{ flexGrow: 1, marginRight: SIZES.base, minHeight: 136 }}>
           <BtnWithBackground
             backgroundColor={COLORS.darkBlue}
             img={img}
             text="My Orders"
             onPress={() => navigation.navigate("Orders")}
-            subText={500}
           />
         </View>
         <View style={{ flexGrow: 1, minHeight: 130 }}>
@@ -32,7 +31,7 @@ const Home = ({ navigation }) => {
           />
         </View>
       </View>
-      <View style={{ width: "100%", minHeight: 80 }}>
+      <View style={{ width: "100%", minHeight: 90 }}>
         <BtnWithBackground
           backgroundColor={COLORS.darkBlue}
           img={img}

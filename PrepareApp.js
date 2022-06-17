@@ -26,8 +26,9 @@ export default function PrepareApp() {
 
       const token = await getData("userToken");
       if (token) {
-        const role = await getData("userRole");
-        if (role === "provider") setIsAdmin(true);
+        // const role = await getData("userRole");
+        // const role = "";
+        // if (role === "provider") setIsAdmin(true);
         setIsLoggedin(true);
       }
     } catch (e) {
@@ -40,8 +41,12 @@ export default function PrepareApp() {
 
   useEffect(() => {
     prepare();
-    // AsyncStorage.clear();
+    AsyncStorage.clear();
   }, []);
+
+  useEffect(() => {
+    // console.log(isAdmin);
+  });
 
   if (!appIsReady) return null;
 

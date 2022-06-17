@@ -13,7 +13,7 @@ const LogoTitle = () => {
       }}
     >
       <View style={{ marginRight: SIZES.small }}>
-        <Logo width={50} height={50} />
+        <Logo width={40} height={40} />
       </View>
       <Text style={{ fontFamily: "robotoBold", fontSize: SIZES.large }}>
         Rawa

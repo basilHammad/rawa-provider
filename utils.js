@@ -2,6 +2,7 @@ import { Keyboard, Linking, Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Clipboard from "expo-clipboard";
 import CryptoJS from "crypto-js";
+import haversine from "haversine";
 
 import { PASS_PHRASE } from "@env";
 
@@ -56,4 +57,39 @@ export const makeCall = (phoneNumber) => {
   } else {
     Linking.openURL(`telprompt:${phoneNumber}`);
   }
+};
+
+const getClosestPointToOrigin = (origin, points) => {
+  const closest = points
+    .map((point) => {
+      return { dist: haversine(origin, point), ...point };
+    })
+    .reduce((prev, current) => {
+      return prev.dist < current.dist ? prev : current;
+    });
+  return closest;
+};
+
+/**
+ * loop throw the numbers of addresses
+ * for each address return the cords of the closest address
+ * flip the origin with the closests
+ */
+export const sortCoords = (curruntLocation, addressesArray) => {
+  let origin = curruntLocation;
+  let remainigPoints = [...addressesArray];
+  let closest;
+  const sorted = [];
+
+  for (let i = 0; i < addressesArray.length; i++) {
+    closest = getClosestPointToOrigin(origin, remainigPoints);
+    sorted.push(closest);
+    origin = closest;
+
+    remainigPoints = [
+      ...remainigPoints.filter((point) => point.id !== origin.id),
+    ];
+  }
+
+  return sorted;
 };

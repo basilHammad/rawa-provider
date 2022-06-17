@@ -53,6 +53,17 @@ const CreateTrip = ({ navigation }) => {
         <Spinner visible={isLoading} />
       ) : (
         <>
+          <Btn style={stl.btn} onPress={handleSubmit}>
+            {internalLoading ? (
+              <ActivityIndicator color={COLORS.white} />
+            ) : (
+              <Text style={{ color: COLORS.white, marginRight: 5 }}>
+                Create
+              </Text>
+            )}
+          </Btn>
+          {error ? <Text style={stl.error}>{error}</Text> : null}
+
           <Input
             value={name}
             onChange={setName}
@@ -60,11 +71,12 @@ const CreateTrip = ({ navigation }) => {
             allowFontScaling={false}
             multiline={false}
             style={{
-              height: "auto",
+              // height: "auto",
               borderWidth: 1,
               marginTop: SIZES.large,
             }}
           />
+
           <FlatList
             data={orders}
             renderItem={({ item, index }) => (
@@ -80,7 +92,7 @@ const CreateTrip = ({ navigation }) => {
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
           />
-          {error ? <Text style={stl.error}>{error}</Text> : null}
+          {/* {error ? <Text style={stl.error}>{error}</Text> : null}
           <Btn style={stl.btn} onPress={handleSubmit}>
             {internalLoading ? (
               <ActivityIndicator color={COLORS.white} />
@@ -89,7 +101,7 @@ const CreateTrip = ({ navigation }) => {
                 Create
               </Text>
             )}
-          </Btn>
+          </Btn> */}
         </>
       )}
     </Container>
@@ -98,27 +110,18 @@ const CreateTrip = ({ navigation }) => {
 
 const stl = StyleSheet.create({
   btn: {
-    flexDirection: "row",
     backgroundColor: COLORS.darkBlue,
     justifyContent: "center",
     alignItems: "center",
     padding: SIZES.medium,
     marginTop: SIZES.large,
     borderRadius: SIZES.medium,
-    position: "absolute",
-    left: SIZES.large,
-    right: SIZES.large,
-    bottom: 50,
+    marginBottom: SIZES.large,
   },
   error: {
-    position: "absolute",
-    left: SIZES.large,
-    right: SIZES.large,
-    bottom: 120,
     textAlign: "center",
     color: COLORS.red,
     fontFamily: FONTS.bold,
-    paddingHorizontal: SIZES.medium,
   },
 });
 

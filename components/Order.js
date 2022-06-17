@@ -3,7 +3,7 @@ import { Entypo } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 
 import { useNavigation } from "@react-navigation/native";
-import { SIZES } from "../constants";
+import { COLORS, FONTS, SIZES } from "../constants";
 
 const Order = ({
   item,
@@ -14,7 +14,6 @@ const Order = ({
   selectedOrdersIds,
 }) => {
   const navigation = useNavigation();
-  console.log(item);
   return withCheckBox ? (
     <TouchableOpacity onPress={() => handleCheckboxChange(item.id)}>
       <View
@@ -27,17 +26,40 @@ const Order = ({
           marginBottom: index !== length - 1 ? SIZES.medium : 0,
         }}
       >
-        <Text style={{ marginRight: SIZES.small }}>{index + 1} -</Text>
+        <Text
+          style={{
+            marginRight: SIZES.small,
+            fontSize: SIZES.medium,
+            fontFamily: FONTS.bold,
+          }}
+        >
+          {index + 1} -
+        </Text>
         <View style={{ marginRight: "auto" }}>
-          <Text>{item.customer.name}</Text>
+          <Text
+            style={{
+              fontFamily: FONTS.bold,
+              fontSize: SIZES.medium,
+            }}
+          >
+            {item.customer.name}
+          </Text>
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "space-between",
+              flexWrap: "wrap",
+              paddingVertical: SIZES.base,
             }}
           >
             {item.order_products.map((order, i) => (
-              <Text key={Math.random()} style={{ marginRight: SIZES.large }}>
+              <Text
+                key={Math.random()}
+                style={{
+                  color: COLORS.textGray,
+                  marginRight: SIZES.large,
+                  marginBottom: SIZES.base,
+                }}
+              >
                 {order.qty} {order.product_name}
               </Text>
             ))}
@@ -54,16 +76,31 @@ const Order = ({
       style={{
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center",
+        // alignItems: "center",
         borderBottomWidth: index !== length - 1 ? 1 : 0,
         paddingBottom: 2,
         borderColor: "#eee",
         marginBottom: index !== length - 1 ? SIZES.medium : 0,
       }}
     >
-      <Text style={{ marginRight: SIZES.small }}>{index + 1} -</Text>
+      <Text
+        style={{
+          marginRight: SIZES.small,
+          fontSize: SIZES.medium,
+          fontFamily: FONTS.bold,
+        }}
+      >
+        {index + 1} -
+      </Text>
       <View style={{ marginRight: "auto" }}>
-        <Text>{item.customer.name}</Text>
+        <Text
+          style={{
+            fontFamily: FONTS.bold,
+            fontSize: SIZES.medium,
+          }}
+        >
+          {item.customer.name}
+        </Text>
         <View
           style={{
             flexDirection: "row",
@@ -72,7 +109,14 @@ const Order = ({
           }}
         >
           {item.order_products.map((order, i) => (
-            <Text key={Math.random()} style={{ marginRight: SIZES.large }}>
+            <Text
+              key={Math.random()}
+              style={{
+                color: COLORS.textGray,
+                marginRight: SIZES.large,
+                marginBottom: SIZES.base,
+              }}
+            >
               {order.qty} {order.product_name}
             </Text>
           ))}
@@ -84,8 +128,6 @@ const Order = ({
         color="blue"
         onPress={() =>
           navigation.navigate("Map", {
-            // latitude: item.customer_address.location_lat,
-            // longitude: item.customer_address.location_lng,
             cords: {
               lat: item.customer_address.location_lat,
               lng: item.customer_address.location_lng,

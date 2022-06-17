@@ -7,7 +7,7 @@ const userReducer = (state, action) => {
         ...state,
         user: action.payload,
         isLoggedin: true,
-        isAdmin: action.payload.role === "provider" ? true : false,
+        // isAdmin: action.payload.role === "provider" ? true : false,
       };
     case types.SET_IS_LOGGEDIN:
       return {

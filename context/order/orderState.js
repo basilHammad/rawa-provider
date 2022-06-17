@@ -56,8 +56,8 @@ const orderState = (props) => {
         setIsloading(false);
       }
     } catch (error) {
-      setIsloading(false);
-      console.warn({ ...error });
+      // setIsloading(false);
+      console.warn("error", { ...error });
     }
   };
 

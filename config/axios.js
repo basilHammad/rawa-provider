@@ -4,7 +4,7 @@ import { BASE_URL } from "@env";
 import { getData } from "../utils";
 
 const fetcher = axios.create({
-  baseURL: "https://acb8-188-247-79-168.ngrok.io/",
+  baseURL: "https://93a8-212-34-11-174.ngrok.io/",
   // baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
@@ -14,6 +14,7 @@ const fetcher = axios.create({
 fetcher.interceptors.request.use(
   async (config) => {
     const token = await getData("userToken");
+    console.log("token", token);
     config.headers.Authorization = `Bearer ${token} `;
 
     return config;

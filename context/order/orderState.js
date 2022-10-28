@@ -44,7 +44,7 @@ const orderState = (props) => {
     }
   };
 
-  const getTrips = async () => {
+  const getTrips = async (cb) => {
     setIsloading(true);
     try {
       const res = await fetcher.get("api/trips");
@@ -54,6 +54,7 @@ const orderState = (props) => {
           payload: res.data.data,
         });
         setIsloading(false);
+        if (cb) cb();
       }
     } catch (error) {
       // setIsloading(false);

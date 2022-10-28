@@ -28,6 +28,7 @@
     "expo-updates": "~0.11.7",
     "getsocial-react-native-sdk": "^7.9.1",
     "haversine": "^1.1.1",
+    "moment": "^2.29.4",
     "pubnub": "^4.37.0",
     "pubnub-react": "^2.1.1",
     "react": "17.0.1",

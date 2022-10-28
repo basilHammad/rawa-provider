@@ -2,12 +2,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import Trips from "../screens/driver-screens/Trips";
-import Map from "../screens/driver-screens/Map";
 import Header from "../components/Header";
 import TripOrders from "../screens/driver-screens/TripOrders";
 import CustomerAddressMap from "../screens/driver-screens/CustomerAddressMap";
 import OrdersList from "../screens/driver-screens/OrdersList";
-import { SIZES } from "../constants";
+import Trip from "../screens/driver-screens/Trip";
+import DeliveringOrder from "../screens/driver-screens/DeliveringOrder";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,14 +30,32 @@ const DriverStack = () => {
           component={Trips}
           options={{ headerTitle: (props) => <Header {...props} /> }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Map"
           component={Map}
           options={({ route }) => ({ title: route.params.title })}
+        /> */}
+        <Stack.Screen
+          name="Orders"
+          component={TripOrders}
+          options={{ title: "الطلبات" }}
         />
-        <Stack.Screen name="Orders" component={TripOrders} />
-        <Stack.Screen name="CustomerAddress" component={CustomerAddressMap} />
+        <Stack.Screen
+          name="CustomerAddress"
+          component={CustomerAddressMap}
+          options={{ title: "عنوان العميل" }}
+        />
         <Stack.Screen name="OrdersList" component={OrdersList} />
+        <Stack.Screen
+          name="Trip"
+          component={Trip}
+          options={({ route }) => ({ title: route.params.title })}
+        />
+        <Stack.Screen
+          name="DeliveringOrder"
+          component={DeliveringOrder}
+          options={({ route }) => ({ title: route.params.title })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, Pressable, ImageBackground } from "react-native";
-import { COLORS, SIZES } from "../constants";
+import { COLORS, FONTS, SIZES } from "../constants";
 
 export const BtnWithBackground = ({
   backgroundColor,
@@ -33,7 +33,7 @@ export const BtnWithBackground = ({
       <Text
         style={{
           color: COLORS.white,
-          fontFamily: "robotoBold",
+          fontFamily: FONTS.bold,
         }}
       >
         {text}

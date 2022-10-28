@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Image, Text } from "react-native";
+import { View, Text } from "react-native";
 
 import Logo from "../assets/logo.svg";
 import { COLORS, FONTS, SIZES } from "../constants";
@@ -28,8 +28,13 @@ const LogoTitle = () => {
         <View style={{ marginRight: SIZES.small }}>
           <Logo width={40} height={40} />
         </View>
-        <Text style={{ fontFamily: "robotoBold", fontSize: SIZES.large }}>
-          Rawa
+        <Text
+          style={{
+            fontFamily: FONTS.bold,
+            fontSize: SIZES.large,
+          }}
+        >
+          روى
         </Text>
       </View>
       <Btn
@@ -45,7 +50,7 @@ const LogoTitle = () => {
             color: COLORS.blue,
           }}
         >
-          logout
+          تسجيل
         </Text>
       </Btn>
     </View>

@@ -3,6 +3,7 @@ import React from "react";
 import { COLORS, FONTS, SIZES } from "../constants";
 
 const ProductCard = ({ item }) => {
+  console.log("item", item);
   return (
     <View
       style={{

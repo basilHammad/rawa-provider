@@ -19,9 +19,9 @@ export const SIZES = {
 };
 
 export const FONTS = {
-  bold: "robotoBold",
-  semiBold: "robotoSemiBold",
-  regular: "robotoRegular",
+  bold: "cairoBold",
+  semiBold: "cairoSemiBold",
+  regular: "cairoRegular",
 };
 
 export const SHADOWS = {

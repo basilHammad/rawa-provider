@@ -4,14 +4,13 @@ import {
   TouchableWithoutFeedback,
   Text,
   ActivityIndicator,
-  Image,
 } from "react-native";
 
+import { COLORS, FONTS, SIZES } from "../constants";
+import { closeKeyboard, validateLoginForm } from "../utils";
 import Container from "../components/Container";
 import Input from "../components/Input";
 import { Btn } from "../components/Buttons";
-import { COLORS, FONTS, SIZES } from "../constants";
-import { closeKeyboard, validateLoginForm } from "../utils";
 import userContext from "../context/user/userContext";
 import useKeyboard from "../hooks/useKeyboard";
 
@@ -113,7 +112,7 @@ const Login = () => {
                   textAlignVertical: "center",
                 }}
               >
-                Login
+                تسجيل الدخول
               </Text>
             )}
           </Btn>

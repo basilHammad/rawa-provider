@@ -1,5 +1,4 @@
-import { View, Text, FlatList } from "react-native";
-import React from "react";
+import { Text, FlatList } from "react-native";
 import Container from "../../components/Container";
 import { FONTS, SIZES } from "../../constants";
 import ProductCard from "../../components/ProductCard";
@@ -24,7 +23,7 @@ const OrdersList = ({ route }) => {
       <FlatList
         data={products}
         renderItem={({ item }) => <ProductCard item={item} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => Math.random()}
         showsVerticalScrollIndicator={false}
       />
     </Container>

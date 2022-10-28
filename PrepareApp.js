@@ -19,9 +19,9 @@ export default function PrepareApp() {
     try {
       await SplashScreen.preventAutoHideAsync();
       await Font.loadAsync({
-        robotoBold: require("./assets/fonts/roboto/bold.ttf"),
-        robotoRegular: require("./assets/fonts/roboto/regular.ttf"),
-        robotoSemiBold: require("./assets/fonts/roboto/semiBold.ttf"),
+        cairoBold: require("./assets/fonts/cairo/bold.ttf"),
+        cairoRegular: require("./assets/fonts/cairo/regular.ttf"),
+        cairoSemiBold: require("./assets/fonts/cairo/semiBold.ttf"),
       });
 
       const token = await getData("userToken");

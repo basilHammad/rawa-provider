@@ -13,7 +13,6 @@ const Order = ({ item, index, length }) => {
       style={{
         flexDirection: "row",
         justifyContent: "space-between",
-        // alignItems: "center",
         borderBottomWidth: index !== length - 1 ? 1 : 0,
         paddingBottom: 2,
         borderColor: "#eee",
@@ -27,7 +26,7 @@ const Order = ({ item, index, length }) => {
           fontFamily: FONTS.bold,
         }}
       >
-        {index + 1} -
+        - {index + 1}
       </Text>
       <TouchableOpacity
         onPress={() => {
@@ -67,21 +66,23 @@ const Order = ({ item, index, length }) => {
           ))}
         </View>
       </TouchableOpacity>
-      <Entypo
-        name="location-pin"
-        size={SIZES.extraLarge}
-        color="blue"
-        onPress={() =>
-          navigation.navigate("CustomerAddress", {
-            cords: {
-              lat: item.address.location_lat,
-              lng: item.address.location_lng,
-            },
-            name: item.full_name,
-            title: item.full_name,
-          })
-        }
-      />
+      {item?.customer?.location_lat && item?.customer?.location_lng && (
+        <Entypo
+          name="location-pin"
+          size={SIZES.extraLarge}
+          color="blue"
+          onPress={() =>
+            navigation.navigate("CustomerAddress", {
+              cords: {
+                lat: item.address.location_lat,
+                lng: item.address.location_lng,
+              },
+              name: item.full_name,
+              title: item.full_name,
+            })
+          }
+        />
+      )}
     </View>
   );
 };

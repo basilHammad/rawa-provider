@@ -22,8 +22,9 @@ const Input = ({
     >
       <TextInput
         style={{
-          borderColor: error ? COLORS.red : COLORS.gray,
+          borderColor: error ? COLORS.red : "#333",
           padding: SIZES.small,
+          textAlign: "right",
           ...style,
         }}
         value={value}

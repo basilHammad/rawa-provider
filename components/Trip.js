@@ -1,19 +1,10 @@
-import { View, Text } from "react-native";
-import React, { useState } from "react";
+import Moment from "moment";
+
+import { View, Text, StyleSheet } from "react-native";
 import { Link } from "@react-navigation/native";
-import { Picker } from "@react-native-picker/picker";
 import { COLORS, FONTS, SHADOWS, SIZES } from "../constants";
-import { Btn } from "./Buttons";
 
-const Trip = ({ isDriver, item, index, length, setModal, location }) => {
-  const hanldeOpenModal = (id) => {
-    setModal((prev) => ({
-      ...prev,
-      isShown: true,
-      selectidTripId: id,
-    }));
-  };
-
+const Trip = ({ item, location }) => {
   return (
     <View
       style={{
@@ -26,54 +17,59 @@ const Trip = ({ isDriver, item, index, length, setModal, location }) => {
         ...SHADOWS.medium,
       }}
     >
-      <Text
-        style={{
-          fontSize: SIZES.large,
-          fontFamily: FONTS.semiBold,
-          marginBottom: SIZES.base,
-          paddingHorizontal: SIZES.medium,
-        }}
-      >
-        {item.trip_name}
-      </Text>
       <View
         style={{
           flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: SIZES.medium,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: SIZES.large,
+            fontFamily: FONTS.bold,
+            marginBottom: SIZES.base,
+            paddingHorizontal: SIZES.medium,
+          }}
+        >
+          {item.trip_name}
+        </Text>
+
+        <Text
+          style={{
+            color: "gray",
+            paddingLeft: SIZES.medium,
+            fontSize: SIZES.medium,
+            fontFamily: FONTS.bold,
+          }}
+        >
+          {Moment(item.trip_delivery_date).calendar()}
+        </Text>
+      </View>
+
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flex: 1,
           paddingHorizontal: SIZES.medium,
           marginBottom: SIZES.small,
         }}
       >
-        <View style={{ flex: 1 }}>
-          <Text style={{ marginBottom: SIZES.base, color: "gray" }}>
-            {item.trip_delivery_date}
-          </Text>
-          <Text>
-            Total Price:
-            <Text style={{ fontFamily: FONTS.semiBold }}>
-              {/* {item.total_price} */}
-              150
-            </Text>
-          </Text>
-        </View>
-        <View style={{ flex: 1 }}>
-          <Text
-            style={{
-              color: COLORS.green,
-              marginBottom: isDriver ? 0 : SIZES.base,
-              marginTop: isDriver ? "auto" : 0,
-            }}
-          >
-            Orders: {item.orders_ids.length}
-          </Text>
-          {!isDriver && (
-            <Text>
-              Driver:{" "}
-              <Text style={{ fontFamily: FONTS.semiBold }}>
-                {item.driver_name ? item.driver_name : "no drivers"}
-              </Text>
-            </Text>
-          )}
-        </View>
+        <Text style={stl.text}>
+          صافي السعر: <Text style={stl.text}>{item.total_price}</Text>
+        </Text>
+
+        <Text
+          style={{
+            ...stl.text,
+            color: COLORS.green,
+          }}
+        >
+          الطلبات: {item.orders_ids.length}
+        </Text>
       </View>
 
       <View
@@ -92,9 +88,10 @@ const Trip = ({ isDriver, item, index, length, setModal, location }) => {
             textAlign: "center",
             borderRightWidth: 1,
             borderColor: COLORS.gray,
+            ...stl.text,
           }}
           to={{
-            screen: isDriver ? "Orders" : "Map",
+            screen: "Orders",
             params: {
               orders: item.orders_ids,
               title: item.trip_name,
@@ -103,102 +100,40 @@ const Trip = ({ isDriver, item, index, length, setModal, location }) => {
             },
           }}
         >
-          View
+          مشاهدة
         </Link>
 
-        {isDriver ? (
-          <Link
-            style={{
-              paddingHorizontal: SIZES.medium,
-              paddingVertical: SIZES.small,
-              color: COLORS.blue,
-              flex: 1,
-              textAlign: "center",
-              borderRightWidth: 1,
-              borderColor: COLORS.gray,
-            }}
-            to={{
-              screen: "Map",
-              params: {
-                orders: item.orders_ids,
-                title: item.trip_name,
-                isTrip: true,
-                location: location,
-              },
-            }}
-            // onPress={() => hanldeOpenModal(item.id)}
-            // disabled={item.driver_id ? true : false}
-          >
-            Start
-          </Link>
-        ) : (
-          <Btn
-            style={{
-              paddingHorizontal: SIZES.medium,
-              paddingVertical: SIZES.small,
-              flex: 1,
-            }}
-            onPress={() => hanldeOpenModal(item.id)}
-            disabled={item.driver_id ? true : false}
-          >
-            <Text
-              style={{
-                color: item.driver_id ? "gray" : COLORS.blue,
-                textAlign: "center",
-              }}
-            >
-              Assign
-            </Text>
-          </Btn>
-        )}
-
-        {/* {isDriver ? (
-          <>
-            <Link
-              style={{
-                backgroundColor: COLORS.blue,
-                paddingHorizontal: SIZES.medium,
-                paddingVertical: SIZES.small,
-                marginRight: SIZES.extraLarge,
-                color: COLORS.white,
-                borderRadius: 5,
-              }}
-              to={{ screen: "Map", params: { coordinates: item.orders } }}
-            >
-              View
-            </Link>
-            <Link
-              style={{
-                backgroundColor: COLORS.green,
-                paddingHorizontal: SIZES.medium,
-                paddingVertical: SIZES.small,
-                color: COLORS.white,
-                borderRadius: 5,
-              }}
-              to={{ screen: "TripMap" }}
-            >
-              Start
-            </Link>
-          </>
-        ) : (
-          <Btn
-            style={{
-              backgroundColor: item.driver_id ? COLORS.red : COLORS.green,
-              paddingHorizontal: SIZES.medium,
-              paddingVertical: SIZES.small,
-              color: COLORS.white,
-              borderRadius: 5,
-              flex: 1,
-            }}
-            onPress={() => hanldeOpenModal(item.id)}
-            disabled={item.driver_id ? true : false}
-          >
-            <Text style={{ color: COLORS.white }}>Assign</Text>
-          </Btn>
-        )} */}
+        <Link
+          style={{
+            paddingHorizontal: SIZES.medium,
+            paddingVertical: SIZES.small,
+            color: COLORS.blue,
+            flex: 1,
+            textAlign: "center",
+            borderRightWidth: 1,
+            borderColor: COLORS.gray,
+            ...stl.text,
+          }}
+          to={{
+            screen: "Trip",
+            params: {
+              orders: item.orders_ids,
+              title: item.trip_name,
+            },
+          }}
+        >
+          بدأ
+        </Link>
       </View>
     </View>
   );
 };
+
+const stl = StyleSheet.create({
+  text: {
+    fontSize: SIZES.medium,
+    fontFamily: FONTS.bold,
+  },
+});
 
 export default Trip;

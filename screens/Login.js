@@ -18,8 +18,8 @@ import useKeyboard from "../hooks/useKeyboard";
 import Logo from "../assets/logo.svg";
 
 const Login = () => {
-  const [username, setusername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setusername] = useState("0780000000");
+  const [password, setPassword] = useState("123456");
   const [errors, setErrors] = useState({});
 
   const { isLoading, login } = useContext(userContext);
@@ -36,14 +36,15 @@ const Login = () => {
   };
 
   const handelSubmit = () => {
-    // const validationErrors = validateLoginForm(username, password);
-    // if (Object.keys(validationErrors).length) {
-    //   setErrors(validationErrors);
-    //   return;
-    // }
+    const validationErrors = validateLoginForm(username, password);
+    if (Object.keys(validationErrors).length) {
+      setErrors(validationErrors);
+      return;
+    }
 
-    login("api_provider", "123456", setErrors);
-    // login(username, password, setErrors);
+    // login("api_provider", "123456", setErrors);
+    // login("0785130430", "123456", setErrors);
+    login(username, password, setErrors);
   };
 
   return (

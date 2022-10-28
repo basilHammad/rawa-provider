@@ -17,8 +17,8 @@ const Map = ({ route }) => {
     <SafeAreaView style={styles.container}>
       <MapView
         initialRegion={{
-          latitude: cords.lat,
-          longitude: cords.lng,
+          latitude: +cords.lat,
+          longitude: +cords.lng,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -27,8 +27,8 @@ const Map = ({ route }) => {
       >
         <Marker
           coordinate={{
-            latitude: cords.lat,
-            longitude: cords.lng,
+            latitude: +cords.lat,
+            longitude: +cords.lng,
           }}
         />
       </MapView>

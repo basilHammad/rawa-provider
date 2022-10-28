@@ -92,8 +92,6 @@ const Map = ({ navigation, route }) => {
     }
   }, [curruntDest]);
 
-  // console.log("currentOrder", currentOrder);
-
   return (
     <SafeAreaView style={styles.container}>
       {origin && destination ? (
@@ -129,7 +127,7 @@ const Map = ({ navigation, route }) => {
               />
             );
           })}
-          {/* <MapViewDirections
+          <MapViewDirections
             precision="high"
             origin={origin}
             destination={destination}
@@ -155,7 +153,7 @@ const Map = ({ navigation, route }) => {
             onError={(errorMessage) => {
               console.log("GOT AN ERROR");
             }}
-          /> */}
+          />
         </MapView>
       ) : null}
       <View
@@ -271,9 +269,7 @@ const Map = ({ navigation, route }) => {
               </View>
             </View>
           ) : (
-            // console.log("selorder")
             <MapOverlayContent order={selectedOrder} />
-            // <Text>test</Text>
           )}
         </RBSheet>
       </View>

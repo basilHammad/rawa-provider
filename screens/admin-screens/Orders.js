@@ -42,6 +42,7 @@ const Orders = () => {
           )}
           keyExtractor={(item) => item.id}
           style={{ marginTop: 50 }}
+          showsVerticalScrollIndicator={false}
         />
       )}
     </Container>

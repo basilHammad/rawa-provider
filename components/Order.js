@@ -14,6 +14,7 @@ const Order = ({
   selectedOrdersIds,
 }) => {
   const navigation = useNavigation();
+
   return withCheckBox ? (
     <TouchableOpacity onPress={() => handleCheckboxChange(item.id)}>
       <View
@@ -129,8 +130,8 @@ const Order = ({
         onPress={() =>
           navigation.navigate("Map", {
             cords: {
-              lat: item.customer_address.location_lat,
-              lng: item.customer_address.location_lng,
+              lat: item.address.location_lat,
+              lng: item.address.location_lng,
             },
             name: item.customer.name,
             title: item.customer.name,

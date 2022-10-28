@@ -4,7 +4,7 @@ import { BASE_URL } from "@env";
 import { getData } from "../utils";
 
 const fetcher = axios.create({
-  baseURL: "https://93a8-212-34-11-174.ngrok.io/",
+  baseURL: "http://rawa.alisuboh.com/",
   // baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",

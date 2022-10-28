@@ -26,10 +26,10 @@ const MapOverlayContent = ({ order }) => {
             <Text>{order.order_delivery_date}</Text>
           </View>
           <Text style={{ marginBottom: SIZES.base }}>
-            Address: {order.customer_address_id.address_name}
+            Address: {order.address.address_name}
           </Text>
           <Text style={{ marginBottom: SIZES.base }}>
-            Address description: {order.customer_address_id.address_description}
+            Address description: {order.address.address_description}
           </Text>
           <Text style={{ marginBottom: SIZES.base }}>Note: {order.note}</Text>
         </View>

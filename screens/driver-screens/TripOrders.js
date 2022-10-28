@@ -8,8 +8,6 @@ import TripOrder from "../../components/TripOrder";
 const Orders = ({ route }) => {
   const { orders } = route.params;
 
-  console.log(orders);
-
   return (
     <Container style={stl.container}>
       <FlatList

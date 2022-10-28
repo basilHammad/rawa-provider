@@ -7,6 +7,7 @@ import { COLORS, FONTS, SIZES } from "../constants";
 
 const Order = ({ item, index, length }) => {
   const navigation = useNavigation();
+
   return (
     <View
       style={{
@@ -28,14 +29,22 @@ const Order = ({ item, index, length }) => {
       >
         {index + 1} -
       </Text>
-      <View style={{ marginRight: "auto" }}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("OrdersList", {
+            products: item.order_products,
+            customerName: item.full_name,
+          });
+        }}
+        style={{ marginRight: "auto", flex: 1 }}
+      >
         <Text
           style={{
             fontFamily: FONTS.bold,
             fontSize: SIZES.medium,
           }}
         >
-          {item.customer.name}
+          {item.full_name}
         </Text>
         <View
           style={{
@@ -57,7 +66,7 @@ const Order = ({ item, index, length }) => {
             </Text>
           ))}
         </View>
-      </View>
+      </TouchableOpacity>
       <Entypo
         name="location-pin"
         size={SIZES.extraLarge}
@@ -65,11 +74,11 @@ const Order = ({ item, index, length }) => {
         onPress={() =>
           navigation.navigate("CustomerAddress", {
             cords: {
-              lat: item.customer_address_id.location_lat,
-              lng: item.customer_address_id.location_lng,
+              lat: item.address.location_lat,
+              lng: item.address.location_lng,
             },
-            name: item.customer.name,
-            title: item.customer.name,
+            name: item.full_name,
+            title: item.full_name,
           })
         }
       />

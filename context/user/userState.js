@@ -10,7 +10,7 @@ const UserState = (props) => {
   const intialState = {
     user: [],
     isLoggedin: false,
-    isAdmin: false,
+    isAdmin: true,
     isLoading: false,
   };
 
@@ -45,7 +45,8 @@ const UserState = (props) => {
         password: password,
       });
 
-      const res = await fetcher.post("api/provider/login", data);
+      const res = await fetcher.post("api/login", data);
+
       if (res.data) {
         setIsloading(false);
 
@@ -57,6 +58,8 @@ const UserState = (props) => {
         await storeData("userToken", res.data.data.access_token);
         await storeData("userRole", res.data.data.role);
       }
+
+      if (res.data.data.role !== "provider") setIsAdmin(false);
     } catch (error) {
       if (error.response) {
         setIsloading(false);

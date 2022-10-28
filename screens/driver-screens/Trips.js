@@ -8,6 +8,8 @@ import Trip from "../../components/Trip";
 import { Btn } from "../../components/Buttons";
 import { COLORS, FONTS, SIZES } from "../../constants";
 import orderContext from "../../context/order/orderContext";
+import userContext from "../../context/user/userContext";
+
 import AssignDriverModal from "../../components/AssignDriverModal";
 import useLocation from "../../hooks/useLocation";
 
@@ -22,8 +24,7 @@ const Trips = ({ navigation, route }) => {
 
   const { location } = useLocation();
 
-  // console.log("location", location);
-
+  const { setIsLoggedin } = useContext(userContext);
   const { isLoading, internalLoading, trips, drivers, getTrips, assignDriver } =
     useContext(orderContext);
 
@@ -37,6 +38,22 @@ const Trips = ({ navigation, route }) => {
 
   return (
     <Container style={stl.container}>
+      {/* <Btn
+        style={{
+          backgroundColor: COLORS.yellow,
+          width: "100%",
+          justifyContet: "center",
+          alignItems: "center",
+          padding: SIZES.small,
+          borderRadius: SIZES.medium,
+          minHeight: 50,
+          // marginTop: iskeyboardOpen ? 0 : "auto",
+          marginBottom: SIZES.large * 2,
+        }}
+        onPress={() => setIsLoggedin(false)}
+      >
+        <Text>logout</Text>
+      </Btn> */}
       {isLoading ? (
         <Spinner visible={isLoading} />
       ) : (

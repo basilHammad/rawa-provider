@@ -50,7 +50,8 @@ const Trip = ({ isDriver, item, index, length, setModal, location }) => {
           <Text>
             Total Price:
             <Text style={{ fontFamily: FONTS.semiBold }}>
-              {item.total_price}
+              {/* {item.total_price} */}
+              150
             </Text>
           </Text>
         </View>

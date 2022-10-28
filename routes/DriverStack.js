@@ -6,6 +6,8 @@ import Map from "../screens/driver-screens/Map";
 import Header from "../components/Header";
 import TripOrders from "../screens/driver-screens/TripOrders";
 import CustomerAddressMap from "../screens/driver-screens/CustomerAddressMap";
+import OrdersList from "../screens/driver-screens/OrdersList";
+import { SIZES } from "../constants";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +37,7 @@ const DriverStack = () => {
         />
         <Stack.Screen name="Orders" component={TripOrders} />
         <Stack.Screen name="CustomerAddress" component={CustomerAddressMap} />
+        <Stack.Screen name="OrdersList" component={OrdersList} />
       </Stack.Navigator>
     </NavigationContainer>
   );

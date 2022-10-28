@@ -3,6 +3,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Clipboard from "expo-clipboard";
 import CryptoJS from "crypto-js";
 import haversine from "haversine";
+import { Alert } from "react-native";
+// import * as Linking from "expo-linking";
 
 import { PASS_PHRASE } from "@env";
 
@@ -92,4 +94,24 @@ export const sortCoords = (curruntLocation, addressesArray) => {
   }
 
   return sorted;
+};
+
+export const openGMap = async (destination) => {
+  if (!destination) {
+    Alert.alert("There seems to be a problem with the locations");
+    return;
+  }
+
+  try {
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}&dir_action=navigate`;
+    const supported = await Linking.canOpenURL(url);
+    if (!supported) {
+      Alert.alert("Could not connect to Google Map app");
+      return;
+    }
+
+    return Linking.openURL(url);
+  } catch (error) {
+    console.log(error);
+  }
 };

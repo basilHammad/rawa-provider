@@ -62,8 +62,8 @@ const useLocation = (
 
   const addresses = useRef(
     orders?.map((order) => ({
-      latitude: order.customer_address_id.location_lat,
-      longitude: order.customer_address_id.location_lng,
+      latitude: +order.address.location_lat,
+      longitude: +order.address.location_lng,
       id: order.id,
     }))
   );

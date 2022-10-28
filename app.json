@@ -21,6 +21,10 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.basilhammad.rawaserviceprovider",
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyD_J-4DJovepBOsOTZXL-_8CHbBQ5PErD4" }
       }
     },
     "web": {

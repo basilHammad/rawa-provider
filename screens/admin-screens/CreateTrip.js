@@ -87,6 +87,7 @@ const CreateTrip = ({ navigation }) => {
                 handleCheckboxChange={handleCheckboxChange}
                 selectedOrdersIds={selectedOrdersIds}
                 withCheckBox
+                showsVerticalScrollIndicator={false}
               />
             )}
             keyExtractor={(item) => item.id}

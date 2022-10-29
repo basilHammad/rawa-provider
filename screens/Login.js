@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import {
   View,
   TouchableWithoutFeedback,
@@ -63,17 +63,25 @@ const Login = () => {
           <Input
             value={username}
             onChange={handleUsernameChange}
-            placeholder="username or mobile number"
+            placeholder="اسم المستخدم او رقم الهاتف"
             error={errors.username}
-            style={{ height: 40, borderBottomWidth: 3 }}
+            style={{
+              height: 40,
+              borderBottomWidth: 3,
+              fontFamily: FONTS.regular,
+            }}
             pareintStyle={{ width: "90%" }}
           />
           <Input
             value={password}
             onChange={handlePasswordChange}
-            placeholder="Password"
+            placeholder="كلمة السر"
             error={errors.password}
-            style={{ height: 40, borderBottomWidth: 3 }}
+            style={{
+              height: 40,
+              borderBottomWidth: 3,
+              fontFamily: FONTS.regular,
+            }}
             pareintStyle={{ width: "90%" }}
             isPassword
           />

@@ -74,8 +74,8 @@ const Order = ({ item, index, length }) => {
           onPress={() =>
             navigation.navigate("CustomerAddress", {
               cords: {
-                lat: item.address.location_lat,
-                lng: item.address.location_lng,
+                lat: item.customer.location_lat,
+                lng: item.customer.location_lng,
               },
               name: item.full_name,
               title: item.full_name,

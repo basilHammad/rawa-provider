@@ -96,22 +96,22 @@ export const sortCoords = (curruntLocation, addressesArray) => {
   return sorted;
 };
 
-export const openGMap = async (destination) => {
-  if (!destination) {
-    Alert.alert("There seems to be a problem with the locations");
-    return;
-  }
+// export const openGMap = async (destination) => {
+//   if (!destination) {
+//     Alert.alert("There seems to be a problem with the locations");
+//     return;
+//   }
 
-  try {
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}&dir_action=navigate`;
-    const supported = await Linking.canOpenURL(url);
-    if (!supported) {
-      Alert.alert("Could not connect to Google Map app");
-      return;
-    }
+//   try {
+//     const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}&dir_action=navigate`;
+//     const supported = await Linking.canOpenURL(url);
+//     if (!supported) {
+//       Alert.alert("Could not connect to Google Map app");
+//       return;
+//     }
 
-    return Linking.openURL(url);
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     return Linking.openURL(url);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

@@ -3,8 +3,16 @@ import Moment from "moment";
 import { View, Text, StyleSheet } from "react-native";
 import { Link } from "@react-navigation/native";
 import { COLORS, FONTS, SHADOWS, SIZES } from "../constants";
+import { Btn } from "./Buttons";
+import { useContext } from "react";
+import orderContext from "../context/order/orderContext";
 
-const Trip = ({ item, location }) => {
+const Trip = ({ item, location, getTrips }) => {
+  const { endTrip } = useContext(orderContext);
+
+  const handleEndTrip = (id) => {
+    endTrip(id, getTrips);
+  };
   return (
     <View
       style={{
@@ -102,28 +110,54 @@ const Trip = ({ item, location }) => {
         >
           مشاهدة
         </Link>
+        {item?.orders_ids?.length ? (
+          <Link
+            style={{
+              paddingHorizontal: SIZES.medium,
+              paddingVertical: SIZES.small,
+              color: COLORS.blue,
+              flex: 1,
+              textAlign: "center",
+              borderRightWidth: 1,
+              borderColor: COLORS.gray,
+              ...stl.text,
+            }}
+            to={{
+              screen: "Trip",
+              params: {
+                orders: item.orders_ids,
+                title: item.trip_name,
+                tripId: item.id,
+              },
+            }}
+          >
+            بدأ
+          </Link>
+        ) : (
+          <Btn
+            style={{
+              paddingHorizontal: SIZES.medium,
+              paddingVertical: SIZES.small,
 
-        <Link
-          style={{
-            paddingHorizontal: SIZES.medium,
-            paddingVertical: SIZES.small,
-            color: COLORS.blue,
-            flex: 1,
-            textAlign: "center",
-            borderRightWidth: 1,
-            borderColor: COLORS.gray,
-            ...stl.text,
-          }}
-          to={{
-            screen: "Trip",
-            params: {
-              orders: item.orders_ids,
-              title: item.trip_name,
-            },
-          }}
-        >
-          بدأ
-        </Link>
+              flex: 1,
+              borderRightWidth: 1,
+              borderColor: COLORS.gray,
+              ...stl.text,
+            }}
+            onPress={() => handleEndTrip(item.id)}
+          >
+            <Text
+              style={{
+                ...stl.text,
+                color: COLORS.red,
+                textAlign: "center",
+              }}
+            >
+              {" "}
+              انهاء
+            </Text>
+          </Btn>
+        )}
       </View>
     </View>
   );

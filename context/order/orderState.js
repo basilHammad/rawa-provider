@@ -12,6 +12,7 @@ const orderState = (props) => {
     drivers: [],
     isLoading: false,
     internalLoading: false,
+    trip: {},
   };
 
   const [state, dispatch] = useReducer(orderReducer, intialState);
@@ -112,6 +113,64 @@ const orderState = (props) => {
     }
   };
 
+  const editOrder = async (id, status, note, cb) => {
+    setIsloading(true);
+    try {
+      const data = JSON.stringify({
+        reason_note: note,
+        status: status,
+        type: 2,
+      });
+
+      const res = await fetcher.put(`api/customer-order/${id}`, data);
+
+      if (res.status === 200) cb();
+
+      setIsloading(false);
+    } catch (error) {
+      console.log({ ...error });
+      setIsloading(false);
+    }
+  };
+
+  const getTripById = async (id) => {
+    setIsloading(true);
+    try {
+      const res = await fetcher.get(`api/trips/${id}`);
+
+      if (res.data.data) {
+        dispatch({
+          type: types.GET_TRIP_BY_ID,
+          payload: res.data.data,
+        });
+      }
+
+      setIsloading(false);
+
+      // console.log("res.data", res.data);
+    } catch (error) {
+      setIsloading(false);
+
+      console.log({ ...error });
+    }
+  };
+
+  const endTrip = async (id, cb) => {
+    setIsloading(true);
+    try {
+      const data = JSON.stringify({
+        status: "3",
+      });
+
+      const res = await fetcher.put(`api/trips/${id}`, data);
+      if (res.status === 200) cb();
+      setIsloading(false);
+    } catch (error) {
+      console.log(error);
+      setIsloading(false);
+    }
+  };
+
   return (
     <orderContext.Provider
       value={{
@@ -120,6 +179,9 @@ const orderState = (props) => {
         getTrips,
         createTrip,
         assignDriver,
+        editOrder,
+        getTripById,
+        endTrip,
       }}
     >
       {props.children}

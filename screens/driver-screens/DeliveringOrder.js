@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "../../components/Container";
 import { COLORS, FONTS, SIZES } from "../../constants";
 import Input from "../../components/Input";
 import { Btn } from "../../components/Buttons";
 import { useNavigation } from "@react-navigation/native";
+import orderContext from "../../context/order/orderContext";
 
 const DeliveringOrder = ({ route }) => {
   const [note, setNote] = useState("");
@@ -12,6 +13,9 @@ const DeliveringOrder = ({ route }) => {
 
   const order = route.params.order;
   const navigation = useNavigation();
+  const { trip, editOrder } = useContext(orderContext);
+
+  console.log("order.id", order.id);
 
   const handleNoteChange = (val) => {
     setNote(val);
@@ -19,14 +23,19 @@ const DeliveringOrder = ({ route }) => {
   };
 
   const handleSubmit = () => {
-    navigation.goBack();
+    editOrder(order.id, "3", note, () => {
+      navigation.goBack();
+    });
   };
 
   const handleReject = () => {
     if (!note) {
       return setError("يجب ادخال سبب الرفض");
     }
-    navigation.goBack();
+
+    editOrder(order.id, "0", note, () => {
+      navigation.goBack();
+    });
   };
 
   useEffect(() => {
@@ -34,6 +43,7 @@ const DeliveringOrder = ({ route }) => {
       setNote("");
     };
   }, []);
+
   return (
     <Container>
       <View style={{ marginTop: SIZES.large }}>
@@ -42,7 +52,7 @@ const DeliveringOrder = ({ route }) => {
             fontFamily: FONTS.bold,
             fontSize: SIZES.font,
             marginBottom: SIZES.base,
-            color: COLORS.green,
+            color: COLORS.red,
           }}
         >
           اسم العميل :{" "}
@@ -62,7 +72,7 @@ const DeliveringOrder = ({ route }) => {
             fontFamily: FONTS.bold,
             fontSize: SIZES.font,
             color: COLORS.red,
-            marginBottom: SIZES.large,
+            marginBottom: SIZES.base,
           }}
         >
           رقم الهاتف :{" "}
@@ -74,6 +84,26 @@ const DeliveringOrder = ({ route }) => {
             }}
           >
             {order.customer.mobile_number}
+          </Text>
+        </Text>
+
+        <Text
+          style={{
+            fontFamily: FONTS.bold,
+            fontSize: SIZES.font,
+            color: COLORS.red,
+            marginBottom: SIZES.large,
+          }}
+        >
+          العنوان :{" "}
+          <Text
+            style={{
+              fontFamily: FONTS.bold,
+              fontSize: SIZES.medium,
+              color: "#333",
+            }}
+          >
+            {order.customer.address_description}
           </Text>
         </Text>
 
@@ -159,13 +189,15 @@ const DeliveringOrder = ({ route }) => {
               onPress={handleSubmit}
               style={{ ...stl.btn, backgroundColor: COLORS.green }}
             >
-              <Text style={{ fontFamily: FONTS.bold }}>اتمام</Text>
+              <Text style={{ fontFamily: FONTS.bold, color: "#fff" }}>
+                اتمام
+              </Text>
             </Btn>
             <Btn
               onPress={handleReject}
               style={{ ...stl.btn, backgroundColor: COLORS.red }}
             >
-              <Text style={{ fontFamily: FONTS.bold }}>رفض</Text>
+              <Text style={{ fontFamily: FONTS.bold, color: "#fff" }}>رفض</Text>
             </Btn>
           </View>
         </View>

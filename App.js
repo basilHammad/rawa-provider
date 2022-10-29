@@ -1,41 +1,36 @@
+import "react-native-gesture-handler";
+import { I18nManager } from "react-native";
+
 import PrepareApp from "./PrepareApp";
 import UserState from "./context/user/userState";
 import OrderState from "./context/order/orderState";
-import PubNub from "pubnub";
-import { PubNubProvider } from "pubnub-react";
-import { I18nManager } from "react-native";
-
-const pubnub = new PubNub({
-  publishKey: "pub-c-4b2e0ecf-f13a-4e2c-b574-43458fbd40a7",
-  subscribeKey: "sub-c-7d878e83-a128-4dc1-8525-52f8f33e00f3",
-});
 
 export default function App() {
   I18nManager.forceRTL(true);
   I18nManager.allowRTL(true);
 
   return (
-    <PubNubProvider client={pubnub}>
-      <UserState>
-        <OrderState>
-          <PrepareApp />
-        </OrderState>
-      </UserState>
-    </PubNubProvider>
+    <UserState>
+      <OrderState>
+        <PrepareApp />
+      </OrderState>
+    </UserState>
   );
 }
 
+// Todo [] sort orders based on driver location
+// Todo [] order submit
+
+// Todo [] fix the logo
+// Todo [] remove admin stack
+
+// Todo [*] edit password
 // Todo [*] flip direction to arabic
 // Todo [*] pull down to refresh
-// Todo [] sort orders based on driver location
-// Todo [] implement going to google maps
-// Todo [] show order status form
-// Todo [] edit password
-// Todo [] remove admin stack
-// Todo [] fix the logo
-// Todo [] change font
+// Todo [*] implement going to google maps
+// Todo [*] show order status form
+// Todo [*] change font
 
-// ! product image is not valid from the api
 // ! get orders by trip id needed
 
 /**

@@ -22,7 +22,7 @@ const Input = ({
     >
       <TextInput
         style={{
-          borderColor: error ? COLORS.red : "#333",
+          borderColor: error ? COLORS.red : COLORS.gray,
           padding: SIZES.small,
           textAlign: "right",
           ...style,

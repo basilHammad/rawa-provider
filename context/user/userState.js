@@ -37,6 +37,33 @@ const UserState = (props) => {
     });
   };
 
+  const editPassword = async (oldPass, newPass, confirmPass, setErrors, cb) => {
+    setIsloading(true);
+
+    try {
+      const data = JSON.stringify({
+        current_password: oldPass,
+        new_password: newPass,
+        new_confirm_password: confirmPass,
+      });
+      const res = await fetcher.post("api/change-password", data);
+
+      // console.log(res);
+
+      if (res.status === 200) cb();
+
+      setIsloading(false);
+    } catch (error) {
+      if (error.response.data.errors.current_password[0]) {
+        setErrors((pre) => ({
+          ...pre,
+          oldPassword: error.response.data.errors.current_password[0],
+        }));
+      }
+      setIsloading(false);
+    }
+  };
+
   const login = async (userName, password, setErrors) => {
     setIsloading(true);
     try {
@@ -83,6 +110,7 @@ const UserState = (props) => {
         login,
         setIsLoggedin,
         setIsAdmin,
+        editPassword,
       }}
     >
       {props.children}

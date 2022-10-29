@@ -7,16 +7,15 @@ import userContext from "../context/user/userContext";
 import { Btn } from "./Buttons";
 
 const LogoTitle = () => {
-  const { setIsLoggedin } = useContext(userContext);
-
   return (
     <View
       style={{
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "flex-end",
         flex: 1,
         paddingHorizontal: SIZES.medium,
+        width: "100%",
       }}
     >
       <View
@@ -25,19 +24,20 @@ const LogoTitle = () => {
           alignItems: "center",
         }}
       >
-        <View style={{ marginRight: SIZES.small }}>
-          <Logo width={40} height={40} />
-        </View>
         <Text
           style={{
             fontFamily: FONTS.bold,
             fontSize: SIZES.large,
+            marginLeft: SIZES.small,
           }}
         >
           روى
         </Text>
+        <View>
+          <Logo width={40} height={40} />
+        </View>
       </View>
-      <Btn
+      {/* <Btn
         style={{
           marginRight: SIZES.extraLarge,
         }}
@@ -50,9 +50,9 @@ const LogoTitle = () => {
             color: COLORS.blue,
           }}
         >
-          تسجيل
+          تسجيل الخروج
         </Text>
-      </Btn>
+      </Btn> */}
     </View>
   );
 };

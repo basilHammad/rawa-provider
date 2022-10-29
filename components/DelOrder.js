@@ -3,12 +3,12 @@ import React from "react";
 import { COLORS, FONTS, SHADOWS, SIZES } from "../constants";
 import OpenMapBtn from "./OpenMapBtn";
 
-const DelOrder = ({ item, index, length }) => {
+const DelOrder = ({ item }) => {
   return (
     <View
       style={{
         justifyContent: "space-between",
-        marginBottom: index !== length - 1 ? SIZES.medium : 0,
+        marginBottom: SIZES.medium,
         paddingTop: SIZES.medium,
         borderWidth: 1,
         borderRadius: 7,
@@ -29,7 +29,7 @@ const DelOrder = ({ item, index, length }) => {
             fontFamily: FONTS.bold,
             fontSize: SIZES.font,
             marginBottom: SIZES.base,
-            color: COLORS.green,
+            color: COLORS.red,
           }}
         >
           اسم العميل :{" "}
@@ -38,6 +38,7 @@ const DelOrder = ({ item, index, length }) => {
               fontFamily: FONTS.bold,
               fontSize: SIZES.medium,
               color: "#333",
+              fontFamily: FONTS.regular,
             }}
           >
             {item.full_name}
@@ -48,6 +49,7 @@ const DelOrder = ({ item, index, length }) => {
             fontFamily: FONTS.bold,
             fontSize: SIZES.font,
             color: COLORS.red,
+            marginBottom: SIZES.base,
           }}
         >
           رقم الهاتف :{" "}
@@ -56,9 +58,69 @@ const DelOrder = ({ item, index, length }) => {
               fontFamily: FONTS.bold,
               fontSize: SIZES.medium,
               color: "#333",
+              fontFamily: FONTS.regular,
             }}
           >
             {item.phone_number}
+          </Text>
+        </Text>
+        {item?.customer?.address_description ? (
+          <Text
+            style={{
+              fontFamily: FONTS.bold,
+              fontSize: SIZES.font,
+              color: COLORS.red,
+            }}
+          >
+            العنوان :{" "}
+            <Text
+              style={{
+                fontFamily: FONTS.bold,
+                fontSize: SIZES.medium,
+                color: "#333",
+                fontFamily: FONTS.semiBold,
+              }}
+            >
+              {item?.customer?.address_description}
+            </Text>
+          </Text>
+        ) : null}
+        <Text
+          style={{
+            fontFamily: FONTS.bold,
+            fontSize: SIZES.font,
+            color: COLORS.red,
+          }}
+        >
+          الحالة :{" "}
+          <Text
+            style={{
+              fontFamily: FONTS.bold,
+              fontSize: SIZES.medium,
+              color: "#333",
+              fontFamily: FONTS.semiBold,
+            }}
+          >
+            {item?.status}
+          </Text>
+        </Text>
+        <Text
+          style={{
+            fontFamily: FONTS.bold,
+            fontSize: SIZES.font,
+            color: COLORS.red,
+          }}
+        >
+          id :{" "}
+          <Text
+            style={{
+              fontFamily: FONTS.bold,
+              fontSize: SIZES.medium,
+              color: "#333",
+              fontFamily: FONTS.semiBold,
+            }}
+          >
+            {item?.id}
           </Text>
         </Text>
       </View>

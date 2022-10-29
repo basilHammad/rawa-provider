@@ -3,7 +3,6 @@ import React from "react";
 import { COLORS, FONTS, SIZES } from "../constants";
 
 const ProductCard = ({ item }) => {
-  console.log("item", item);
   return (
     <View
       style={{
@@ -14,21 +13,6 @@ const ProductCard = ({ item }) => {
         marginBottom: SIZES.medium,
       }}
     >
-      <View
-        style={{
-          width: 70,
-          height: 70,
-          marginRight: SIZES.medium,
-          borderRadius: SIZES.large,
-          overflow: "hidden",
-        }}
-      >
-        <Image
-          style={{ width: "100%", height: "100%" }}
-          source={require("../assets/placeholder-image.png")}
-          resizeMode="cover"
-        />
-      </View>
       <View
         style={{
           flexDirection: "row",

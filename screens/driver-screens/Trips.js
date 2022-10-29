@@ -56,7 +56,7 @@ const Trips = ({ navigation }) => {
                 index={index}
                 length={trips.length}
                 location={location}
-                isDriver
+                getTrips={getTrips}
               />
             )}
             keyExtractor={(item) => item.id}

@@ -5,18 +5,27 @@ import { createOpenLink } from "react-native-open-maps";
 import { COLORS, FONTS, SIZES } from "../constants";
 import { Btn } from "./Buttons";
 
-const OpenMapBtn = ({ lat, lng, order }) => {
+const OpenMapBtn = ({ order }) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const navigation = useNavigation();
+
+  console.log("lat", order?.customer?.location_lat);
+  console.log("lng", order?.customer?.location_lng);
 
   useEffect(() => {
     if (!isPressed) return;
 
     createOpenLink({
       start: "",
-      end: lat && lng ? `${lat}, ${lng}` : "",
-      navigate: lat && lng ? true : false,
+      end:
+        order?.customer?.location_lat && order?.customer?.location_lng
+          ? `${order?.customer?.location_lat}, ${order?.customer?.location_lng}`
+          : "",
+      navigate:
+        order?.customer?.location_lat && order?.customer?.location_lng
+          ? true
+          : false,
     }).call();
     navigation.navigate("DeliveringOrder", {
       order: order,

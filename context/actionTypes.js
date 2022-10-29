@@ -5,3 +5,4 @@ export const SET_IS_ADMIN = "SET_IS_ADMIN";
 export const GET_ORDERS = "GET_ORDERS";
 export const GET_TRIPS = "GET_TRIPS";
 export const SET_INTERNAL_LOADING = "SET_INTERNAL_LOADING";
+export const GET_TRIP_BY_ID = "GET_TRIP_BY_ID";

@@ -27,6 +27,11 @@ const orderReducer = (state, action) => {
         ...state,
         internalLoading: action.payload,
       };
+    case types.GET_TRIP_BY_ID:
+      return {
+        ...state,
+        trip: action.payload,
+      };
     default:
       return state;
   }

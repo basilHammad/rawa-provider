@@ -14,7 +14,7 @@ const fetcher = axios.create({
 fetcher.interceptors.request.use(
   async (config) => {
     const token = await getData("userToken");
-    console.log("token", token);
+    // console.log("token", token);
     config.headers.Authorization = `Bearer ${token} `;
 
     return config;
